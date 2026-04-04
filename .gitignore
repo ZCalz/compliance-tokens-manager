@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+
+# Anchor / Solana build outputs
+target/
+dist/
+build/
+*.js.map
+.anchor/
+
+# Environment & secrets
+.env
+.env.local
+.env.production
+*.pem
+*.key
+secrets/
+
+# Claude Code personal overrides (don't share these)
+.claude/settings.local.json
+CLAUDE.local.md
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
