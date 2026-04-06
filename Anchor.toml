@@ -7,6 +7,7 @@ skip-lint = false
 
 [programs.localnet]
 security_tokens_manager = "Ev7Aerjb5EQSAi2wAiBqJBatZSyjCGhqzxDZk6rjEnpS"
+transfer_hook = "FWFApmENh3amqFF3yugs1tMdo9wj5e7LnXS18ppqEH8w"
 
 [provider]
 cluster = "localnet"

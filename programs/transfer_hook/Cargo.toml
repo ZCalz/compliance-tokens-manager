@@ -1,12 +1,12 @@
 [package]
-name = "security_tokens_manager"
+name = "transfer_hook"
 version = "0.1.0"
-description = "Token-2022 security token factory with KYC/AML compliance"
+description = "KYC/AML transfer hook for Token-2022 security tokens"
 edition = "2021"
 
 [lib]
 crate-type = ["cdylib", "lib"]
-name = "security_tokens_manager"
+name = "transfer_hook"
 
 [features]
 default = []
@@ -20,11 +20,12 @@ custom-heap = []
 custom-panic = []
 
 [dependencies]
-anchor-lang = { version = "1.0.0", features = ["init-if-needed"] }
-# Use the interface crate (not the full spl-token-2022 "6" impl) because it
-# aligns with anchor-lang's solana-pubkey 3.0.0 dependency.
+anchor-lang = "1.0.0"
 spl-token-2022-interface = "2.1.0"
-spl-token-metadata-interface = "0.8"
+spl-tlv-account-resolution = "0.11"
+spl-transfer-hook-interface = "2.1.0"
+# Import security_tokens_manager state types (KycRecord, TokenConfig).
+security_tokens_manager = { path = "../security_tokens_manager", features = ["cpi"] }
 
 [dev-dependencies]
 litesvm = "0.10.0"
