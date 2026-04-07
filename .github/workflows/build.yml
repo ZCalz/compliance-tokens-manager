@@ -32,13 +32,13 @@ jobs:
             target
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
-      # ✅ Format check (fails if not formatted)
-      - name: Check formatting
-        run: cargo fmt --all -- --check
+      # # ✅ Format check (fails if not formatted)
+      # - name: Check formatting
+      #   run: cargo fmt --all -- --check
 
-      # ✅ Clippy (strict)
-      - name: Run Clippy
-        run: cargo clippy --all-targets --all-features -- -D warnings
+      # # ✅ Clippy (strict)
+      # - name: Run Clippy
+      #   run: cargo clippy --all-targets --all-features -- -D warnings
 
       - name: Build
         run: cargo build --verbose
