@@ -32,11 +32,9 @@ jobs:
             target
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
-      # # ✅ Format check (fails if not formatted)
       # - name: Check formatting
       #   run: cargo fmt --all -- --check
 
-      # # ✅ Clippy (strict)
       # - name: Run Clippy
       #   run: cargo clippy --all-targets --all-features -- -D warnings
 
@@ -67,21 +65,22 @@ jobs:
             target
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
-      # Install Solana CLI
-      - name: Install Solana
+      - name: Install Solana (binary)
         run: |
           SOLANA_VERSION=${{ vars.SOLANA_CLI_VERSION || 'v1.18.18' }}
-          sh -c "$(curl -sSfL https://release.solana.com/$SOLANA_VERSION/install)"
-          echo "$HOME/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
+
+          wget https://github.com/solana-labs/solana/releases/download/$SOLANA_VERSION/solana-release-x86_64-unknown-linux-gnu.tar.bz2
+          tar -xjf solana-release-x86_64-unknown-linux-gnu.tar.bz2
+
+          echo "$PWD/solana-release/bin" >> $GITHUB_PATH
+
           solana --version
 
-      # Setup test wallet
       - name: Setup Solana keypair
         run: |
           solana-keygen new --no-bip39-passphrase -o ~/.config/solana/id.json
           solana config set --keypair ~/.config/solana/id.json
 
-      # Install Anchor CLI
       - name: Install Anchor
         run: |
           cargo install --git https://github.com/coral-xyz/anchor avm --force
