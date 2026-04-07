@@ -1,4 +1,4 @@
-name: Anchor Build
+name: Rust + Anchor CI
 
 on:
   push:
@@ -11,12 +11,17 @@ env:
 
 jobs:
   build:
+    name: Build Rust
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-      - uses: dtolnay/rust-toolchain@stable
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
 
       - name: Cache cargo
         uses: actions/cache@v4
@@ -26,17 +31,32 @@ jobs:
             ~/.cargo/git
             target
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      # ✅ Format check (fails if not formatted)
+      - name: Check formatting
+        run: cargo fmt --all -- --check
+
+      # ✅ Clippy (strict)
+      - name: Run Clippy
+        run: cargo clippy --all-targets --all-features -- -D warnings
 
       - name: Build
         run: cargo build --verbose
 
-  run-anchor-test:
+      - name: Run Rust tests
+        run: cargo test --verbose
+
+  anchor-tests:
+    name: Anchor Tests
     runs-on: ubuntu-latest
+    needs: build
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-      - uses: dtolnay/rust-toolchain@stable
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
 
       - name: Cache cargo
         uses: actions/cache@v4
@@ -47,13 +67,31 @@ jobs:
             target
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
-      - uses: ./.github/actions/setup-solana/
-        with:
-          solana-cli-version: ${{ vars.SOLANA_CLI_VERSION }}
+      # Install Solana CLI
+      - name: Install Solana
+        run: |
+          SOLANA_VERSION=${{ vars.SOLANA_CLI_VERSION || 'v1.18.18' }}
+          sh -c "$(curl -sSfL https://release.solana.com/$SOLANA_VERSION/install)"
+          echo "$HOME/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
+          solana --version
 
-      - uses: ./.github/actions/setup-anchor/
-        with:
-          anchor-version: ${{ vars.ANCHOR_CLI_VERSION }}
+      # Setup test wallet
+      - name: Setup Solana keypair
+        run: |
+          solana-keygen new --no-bip39-passphrase -o ~/.config/solana/id.json
+          solana config set --keypair ~/.config/solana/id.json
 
-      - name: Run tests
-        run: anchor test
+      # Install Anchor CLI
+      - name: Install Anchor
+        run: |
+          cargo install --git https://github.com/coral-xyz/anchor avm --force
+          ANCHOR_VERSION=${{ vars.ANCHOR_CLI_VERSION || 'latest' }}
+          avm install $ANCHOR_VERSION
+          avm use $ANCHOR_VERSION
+          anchor --version
+
+      - name: Anchor build
+        run: anchor build
+
+      - name: Anchor test
+        run: anchor test --skip-build
