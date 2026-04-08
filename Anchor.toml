@@ -7,8 +7,8 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-security_tokens_manager = "Ev7Aerjb5EQSAi2wAiBqJBatZSyjCGhqzxDZk6rjEnpS"
-transfer_hook = "FWFApmENh3amqFF3yugs1tMdo9wj5e7LnXS18ppqEH8w"
+security_tokens_manager = "5LrL1ep4NtbXoKz2QwBEBYp5DWEJeLx9hkYN8jiBH9k9"
+transfer_hook = "EAGPJU5T8nEu5mfBFE4TTmtXZtFPhmPBSLsPrNDDhT2j"
 
 [provider]
 cluster = "localnet"
