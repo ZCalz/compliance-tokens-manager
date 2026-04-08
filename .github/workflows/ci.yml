@@ -64,5 +64,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-cargo-build-
 
+      # Fresh checkout has no target/deploy keypairs; skip program ID vs source check.
       - name: Build programs
-        run: anchor build
+        run: anchor build --ignore-keys
