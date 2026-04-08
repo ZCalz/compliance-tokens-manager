@@ -48,11 +48,7 @@ pub mod security_tokens_manager {
 
     /// Force-transfer tokens from any account using the PermanentDelegate.
     /// Reserved for regulatory enforcement (court orders, seizure).
-    pub fn forced_transfer(
-        ctx: Context<ForcedTransfer>,
-        amount: u64,
-        decimals: u8,
-    ) -> Result<()> {
+    pub fn forced_transfer(ctx: Context<ForcedTransfer>, amount: u64, decimals: u8) -> Result<()> {
         instructions::forced_transfer::handler(ctx, amount, decimals)
     }
 }

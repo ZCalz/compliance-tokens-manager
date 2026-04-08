@@ -85,8 +85,7 @@ pub fn handler(ctx: Context<InitializeExtraAccountMetas>) -> Result<()> {
 
     let mint_key = ctx.accounts.mint.key();
     let bump = ctx.bumps.extra_account_meta_list;
-    let signer_seeds: &[&[&[u8]]] =
-        &[&[EXTRA_ACCOUNT_METAS_SEED, mint_key.as_ref(), &[bump]]];
+    let signer_seeds: &[&[&[u8]]] = &[&[EXTRA_ACCOUNT_METAS_SEED, mint_key.as_ref(), &[bump]]];
 
     invoke_signed(
         &system_instruction::create_account(
@@ -104,10 +103,7 @@ pub fn handler(ctx: Context<InitializeExtraAccountMetas>) -> Result<()> {
         signer_seeds,
     )?;
 
-    let mut data = ctx
-        .accounts
-        .extra_account_meta_list
-        .try_borrow_mut_data()?;
+    let mut data = ctx.accounts.extra_account_meta_list.try_borrow_mut_data()?;
     ExtraAccountMetaList::init::<ExecuteInstruction>(&mut data, &account_metas)?;
 
     msg!(

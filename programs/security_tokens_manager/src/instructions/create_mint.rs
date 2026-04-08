@@ -88,7 +88,10 @@ pub struct CreateMint<'info> {
 
 pub fn handler(ctx: Context<CreateMint>, args: CreateMintArgs) -> Result<()> {
     require!(args.name.len() <= MAX_NAME_LEN, ErrorCode::NameTooLong);
-    require!(args.symbol.len() <= MAX_SYMBOL_LEN, ErrorCode::SymbolTooLong);
+    require!(
+        args.symbol.len() <= MAX_SYMBOL_LEN,
+        ErrorCode::SymbolTooLong
+    );
     require!(args.uri.len() <= MAX_URI_LEN, ErrorCode::UriTooLong);
     require!(
         args.jurisdiction_allowlist.len() <= 30,

@@ -89,7 +89,9 @@ pub struct KycRecord {
 // Enums
 // ---------------------------------------------------------------------------
 
-#[derive(AnchorSerialize, AnchorDeserialize, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, InitSpace)]
+#[derive(
+    AnchorSerialize, AnchorDeserialize, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, InitSpace,
+)]
 pub enum KycLevel {
     /// Basic identity verification (name, DOB, ID document). Serialised as 0.
     Basic,

@@ -46,7 +46,11 @@ pub fn handler(ctx: Context<RevokeKyc>, args: RevokeKycArgs) -> Result<()> {
 
     msg!(
         "KYC {}: token_account={}",
-        if args.permanent { "revoked" } else { "suspended" },
+        if args.permanent {
+            "revoked"
+        } else {
+            "suspended"
+        },
         ctx.accounts.token_account.key
     );
 

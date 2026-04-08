@@ -45,7 +45,10 @@ pub fn handler(ctx: Context<IssueTokens>, amount: u64) -> Result<()> {
     require!(record.status == KycStatus::Active, ErrorCode::KycNotActive);
     if record.expires_at != 0 {
         let clock = Clock::get()?;
-        require!(record.expires_at > clock.unix_timestamp, ErrorCode::KycExpired);
+        require!(
+            record.expires_at > clock.unix_timestamp,
+            ErrorCode::KycExpired
+        );
     }
     require!(
         record.kyc_level >= ctx.accounts.token_config.required_kyc_level,

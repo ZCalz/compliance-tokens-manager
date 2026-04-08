@@ -15,9 +15,7 @@ pub mod transfer_hook {
 
     /// Register the extra accounts this hook needs on every transfer.
     /// Must be called once after create_mint before any transfers occur.
-    pub fn initialize_extra_account_metas(
-        ctx: Context<InitializeExtraAccountMetas>,
-    ) -> Result<()> {
+    pub fn initialize_extra_account_metas(ctx: Context<InitializeExtraAccountMetas>) -> Result<()> {
         instructions::initialize_extra_account_metas::handler(ctx)
     }
 
