@@ -21,6 +21,7 @@ custom-panic = []
 
 [dependencies]
 anchor-lang = { version = "1.0.0", features = ["init-if-needed"] }
+base64ct = { workspace = true }
 # Use the interface crate (not the full spl-token-2022 "6" impl) because it
 # aligns with anchor-lang's solana-pubkey 3.0.0 dependency.
 spl-token-2022-interface = "2.1.0"

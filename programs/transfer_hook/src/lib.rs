@@ -7,7 +7,7 @@ use anchor_lang::prelude::*;
 pub use constants::*;
 pub use instructions::*;
 
-declare_id!("FWFApmENh3amqFF3yugs1tMdo9wj5e7LnXS18ppqEH8w");
+declare_id!("EAGPJU5T8nEu5mfBFE4TTmtXZtFPhmPBSLsPrNDDhT2j");
 
 #[program]
 pub mod transfer_hook {
