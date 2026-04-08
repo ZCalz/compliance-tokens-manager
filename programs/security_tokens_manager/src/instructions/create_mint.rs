@@ -155,8 +155,7 @@ pub fn handler(ctx: Context<CreateMint>, args: CreateMintArgs) -> Result<()> {
             ctx.accounts.mint.key,
             Some(*ctx.accounts.issuer.key),
             Some(*ctx.accounts.transfer_hook_program.key),
-        )
-        .map_err(|e| ProgramError::from(e))?,
+        )?,
         &[
             ctx.accounts.token_program.to_account_info(),
             ctx.accounts.mint.to_account_info(),
@@ -169,8 +168,7 @@ pub fn handler(ctx: Context<CreateMint>, args: CreateMintArgs) -> Result<()> {
             &spl_token_2022_interface::ID,
             ctx.accounts.mint.key,
             &spl_token_2022_interface::state::AccountState::Frozen,
-        )
-        .map_err(|e| ProgramError::from(e))?,
+        )?,
         &[
             ctx.accounts.token_program.to_account_info(),
             ctx.accounts.mint.to_account_info(),
@@ -183,8 +181,7 @@ pub fn handler(ctx: Context<CreateMint>, args: CreateMintArgs) -> Result<()> {
             &spl_token_2022_interface::ID,
             ctx.accounts.mint.key,
             ctx.accounts.issuer.key,
-        )
-        .map_err(|e| ProgramError::from(e))?,
+        )?,
         &[
             ctx.accounts.token_program.to_account_info(),
             ctx.accounts.mint.to_account_info(),
@@ -197,8 +194,7 @@ pub fn handler(ctx: Context<CreateMint>, args: CreateMintArgs) -> Result<()> {
             &spl_token_2022_interface::ID,
             ctx.accounts.mint.key,
             Some(ctx.accounts.issuer.key),
-        )
-        .map_err(|e| ProgramError::from(e))?,
+        )?,
         &[
             ctx.accounts.token_program.to_account_info(),
             ctx.accounts.mint.to_account_info(),
@@ -212,8 +208,7 @@ pub fn handler(ctx: Context<CreateMint>, args: CreateMintArgs) -> Result<()> {
             ctx.accounts.mint.key,
             Some(*ctx.accounts.issuer.key),
             Some(*ctx.accounts.mint.key),
-        )
-        .map_err(|e| ProgramError::from(e))?,
+        )?,
         &[
             ctx.accounts.token_program.to_account_info(),
             ctx.accounts.mint.to_account_info(),
@@ -230,8 +225,7 @@ pub fn handler(ctx: Context<CreateMint>, args: CreateMintArgs) -> Result<()> {
             ctx.accounts.issuer.key,
             Some(ctx.accounts.issuer.key),
             args.decimals,
-        )
-        .map_err(|e| ProgramError::from(e))?,
+        )?,
         &[
             ctx.accounts.token_program.to_account_info(),
             ctx.accounts.mint.to_account_info(),

@@ -63,8 +63,7 @@ pub fn handler(ctx: Context<IssueTokens>, amount: u64) -> Result<()> {
             ctx.accounts.issuer.key,
             &[],
             amount,
-        )
-        .map_err(|e| ProgramError::from(e))?,
+        )?,
         &[
             ctx.accounts.token_program.to_account_info(),
             ctx.accounts.mint.to_account_info(),

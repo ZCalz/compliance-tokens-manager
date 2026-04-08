@@ -37,8 +37,7 @@ pub fn handler(ctx: Context<ThawAccount>) -> Result<()> {
             ctx.accounts.mint.key,
             ctx.accounts.compliance_officer.key,
             &[],
-        )
-        .map_err(|e| ProgramError::from(e))?,
+        )?,
         &[
             ctx.accounts.token_program.to_account_info(),
             ctx.accounts.token_account.to_account_info(),

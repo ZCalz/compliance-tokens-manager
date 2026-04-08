@@ -54,8 +54,7 @@ pub fn handler(ctx: Context<ForcedTransfer>, amount: u64, decimals: u8) -> Resul
             &[],
             amount,
             decimals,
-        )
-        .map_err(|e| ProgramError::from(e))?,
+        )?,
         &[
             ctx.accounts.token_program.to_account_info(),
             ctx.accounts.source.to_account_info(),
