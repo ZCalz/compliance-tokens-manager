@@ -4,6 +4,11 @@ members = [
 ]
 resolver = "2"
 
+[workspace.dependencies]
+# base64ct 1.8+ declares edition2024; Solana platform-tools' Cargo 1.84 cannot parse it.
+# Pin so the lockfile resolves to a manifest Cargo 1.84 can read (see spki -> base64ct).
+base64ct = "=1.7.3"
+
 [profile.release]
 overflow-checks = true
 lto = "fat"
