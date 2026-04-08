@@ -1,5 +1,5 @@
 use anchor_lang::prelude::*;
-use security_tokens_manager::state::{KycLevel, KycRecord, KycStatus, TokenConfig};
+use security_tokens_manager::state::{KycRecord, KycStatus, TokenConfig};
 
 use crate::error::HookError;
 
