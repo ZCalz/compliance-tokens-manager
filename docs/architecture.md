@@ -12,6 +12,8 @@ an unlimited number of independent Token-2022 mints. Each mint you create gets i
 name, symbol, metadata, KYC registry, and compliance configuration. Tokens are isolated
 from each other — KYC approval for one does not carry over to another.
 
+**See also:** [Tokenized stocks vs this repository (architecture comparison)](tokenized-stocks-architecture.md) — how typical on-chain equity-style programs relate to this design.
+
 ---
 
 ## Token Factory: Creating New Tokens
